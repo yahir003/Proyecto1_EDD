@@ -75,7 +75,7 @@ Los medicamentos se insertan mediante el método:
 ```
 insertar_ordenado()
 ```
-![Diagrama de actividades](LDEI.png)
+![Lista Doblementeg Enlazada Inventario](LDI.png)
 
 Este método mantiene la lista ordenada por código de medicamento, lo cual permite:
 
@@ -289,4 +289,5 @@ Las decisiones de diseño se enfocaron en:
 
 * Anexos (Diagrama de Actividades)
 * ![Diagrama de actividades](act.png)
+
 
