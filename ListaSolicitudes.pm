@@ -149,7 +149,7 @@ sub eliminar_primera {
 }
 
 
-1;sub generar_reporte_graphviz {
+sub generar_reporte_graphviz {
     my ($self, $archivo) = @_;
 
     open(my $fh, ">", $archivo) or die "No se pudo crear archivo";
@@ -158,7 +158,7 @@ sub eliminar_primera {
     print $fh "rankdir=LR;\n";
     print $fh "node [shape=circle, style=filled, fillcolor=lightblue, fontname=\"Arial\"];\n";
 
-    # Contador total (requisito del PDF)
+
     my $total = $self->total;
     print $fh "contador [shape=box, fillcolor=lightyellow, label=\"Total solicitudes: $total\"];\n";
 
@@ -176,7 +176,6 @@ sub eliminar_primera {
     my $i = 0;
     my @nodos;
 
-    # Recorrido circular REAL
     do {
         my $id = "sol$i";
         push @nodos, $id;
@@ -193,21 +192,20 @@ sub eliminar_primera {
 
     } while ($actual != $inicio);
 
-    # Flechas bidireccionales (REQUISITO DEL PDF)
+    
     for (my $j = 0; $j < @nodos; $j++) {
         my $sig = ($j + 1) % @nodos;
         print $fh "$nodos[$j] -> $nodos[$sig];\n";
         print $fh "$nodos[$sig] -> $nodos[$j];\n";
     }
 
-    # Conectar contador al primer nodo
     print $fh "contador -> $nodos[0];\n";
 
     print $fh "}\n";
     close($fh);
 
-    # Genera la imagen automáticamente (OBLIGATORIO)
     system("dot -Tpng $archivo -o reporte_solicitudes.png");
 
     print "Reporte Graphviz de Solicitudes generado: reporte_solicitudes.png\n";
 }
+1;

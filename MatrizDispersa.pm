@@ -168,10 +168,7 @@ sub generar_reporte_graphviz {
     print $fh "rankdir=LR;\n";
     print $fh "node [fontname=\"Arial\"];\n";
 
-    # Nodo raiz
     print $fh "raiz [label=\"Matriz Dispersa\", shape=box, style=filled, fillcolor=gray];\n";
-
-    # ===== CABECERAS DE FILAS (LABORATORIOS) =====
     my $fila = $self->raiz->abajo;
 
     while ($fila) {
@@ -206,7 +203,7 @@ sub generar_reporte_graphviz {
         $fila = $fila->abajo;
     }
 
-    # ===== CABECERAS DE COLUMNAS (MEDICAMENTOS) =====
+   
     my $col = $self->raiz->derecha;
 
     while ($col) {
@@ -223,7 +220,6 @@ sub generar_reporte_graphviz {
     print $fh "}\n";
     close($fh);
 
-    # Generar imagen PNG automaticamente
     system("dot -Tpng $archivo -o reporte_matriz.png");
 
     print "Reporte de matriz dispersa generado: reporte_matriz.png\n";

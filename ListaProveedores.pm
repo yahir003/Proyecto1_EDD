@@ -79,10 +79,7 @@ sub generar_reporte_graphviz {
         my $id_prov = "prov$p";
         my $label_prov = "NIT: " . $prov->nit . "\\nEmpresa: " . $prov->empresa;
 
-        # Nodo proveedor (lista principal horizontal)
         print $fh "$id_prov [shape=box, style=filled, fillcolor=lightyellow, label=\"$label_prov\"];\n";
-
-        # Graficar lista de entregas (vertical)
         my $ent = $prov->entregas->cabeza;
         my $e = 0;
         my $anterior_ent = "";
@@ -96,11 +93,9 @@ sub generar_reporte_graphviz {
 
             print $fh "$id_ent [shape=ellipse, style=filled, fillcolor=lightblue, label=\"$label_ent\"];\n";
 
-            # Conexión proveedor -> primera entrega
             if ($e == 0) {
                 print $fh "$id_prov -> $id_ent;\n";
             } else {
-                # Conexión vertical entre entregas
                 print $fh "$anterior_ent -> $id_ent;\n";
             }
 
@@ -114,7 +109,6 @@ sub generar_reporte_graphviz {
 
     } while ($prov != $inicio);
 
-    # Conectar proveedores de forma circular (doble enlace visual)
     for (my $i = 0; $i < $p; $i++) {
         my $siguiente = ($i + 1) % $p;
         print $fh "prov$i -> prov$siguiente [dir=both];\n";

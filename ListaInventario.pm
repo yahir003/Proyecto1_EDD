@@ -267,21 +267,19 @@ sub generar_reporte_graphviz {
     my $actual = $self->cabeza;
     my $i = 0;
 
-    # Nodo puntero primero (requisito del PDF)
     print $fh "primero [shape=plaintext, label=\"PRIMERO\"];\n";
 
     while ($actual) {
 
         my $id = "med$i";
 
-        # ===== COLORES SEGUN EL PDF =====
-        my $color = "lightgreen"; # Normal
+        my $color = "lightgreen"; 
 
-        # Rojo = bajo stock
+       
         if (defined $actual->minimo && $actual->cantidad <= $actual->minimo) {
             $color = "red";
         }
-        # Amarillo = proximo a vencer (si tiene fecha registrada)
+      
         elsif (defined $actual->vencimiento && $actual->vencimiento ne "") {
             $color = "yellow";
         }
@@ -293,12 +291,11 @@ sub generar_reporte_graphviz {
 
         print $fh "$id [fillcolor=$color, label=\"$label\"];\n";
 
-        # Conectar puntero primero al nodo cabeza
         if ($i == 0) {
             print $fh "primero -> $id;\n";
         }
 
-        # Flechas bidireccionales (DOBLEMENTE ENLAZADA)
+    
         if ($actual->siguiente) {
             my $sig = "med" . ($i + 1);
             print $fh "$id -> $sig;\n";
@@ -309,7 +306,6 @@ sub generar_reporte_graphviz {
         $i++;
     }
 
-    # Nodo puntero ultimo
     my $ultimo = "med" . ($i - 1);
     print $fh "ultimo [shape=plaintext, label=\"ULTIMO\"];\n";
     print $fh "$ultimo -> ultimo;\n";
