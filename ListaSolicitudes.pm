@@ -147,4 +147,67 @@ sub eliminar_primera {
     $self->cabeza($nueva);
     $self->total($self->total - 1);
 }
-1;
+
+
+1;sub generar_reporte_graphviz {
+    my ($self, $archivo) = @_;
+
+    open(my $fh, ">", $archivo) or die "No se pudo crear archivo";
+
+    print $fh "digraph Solicitudes {\n";
+    print $fh "rankdir=LR;\n";
+    print $fh "node [shape=circle, style=filled, fillcolor=lightblue, fontname=\"Arial\"];\n";
+
+    # Contador total (requisito del PDF)
+    my $total = $self->total;
+    print $fh "contador [shape=box, fillcolor=lightyellow, label=\"Total solicitudes: $total\"];\n";
+
+    my $actual = $self->cabeza;
+
+    if (!$actual) {
+        print $fh "vacio [label=\"Sin solicitudes pendientes\"];\n";
+        print $fh "}\n";
+        close($fh);
+        system("dot -Tpng $archivo -o reporte_solicitudes.png");
+        return;
+    }
+
+    my $inicio = $actual;
+    my $i = 0;
+    my @nodos;
+
+    # Recorrido circular REAL
+    do {
+        my $id = "sol$i";
+        push @nodos, $id;
+
+        my $label = "Departamento: " . $actual->departamento .
+                    "\\nCodigo: " . $actual->codigo_medicamento .
+                    "\\nCantidad: " . $actual->cantidad .
+                    "\\nPrioridad: " . $actual->prioridad;
+
+        print $fh "$id [label=\"$label\"];\n";
+
+        $actual = $actual->siguiente;
+        $i++;
+
+    } while ($actual != $inicio);
+
+    # Flechas bidireccionales (REQUISITO DEL PDF)
+    for (my $j = 0; $j < @nodos; $j++) {
+        my $sig = ($j + 1) % @nodos;
+        print $fh "$nodos[$j] -> $nodos[$sig];\n";
+        print $fh "$nodos[$sig] -> $nodos[$j];\n";
+    }
+
+    # Conectar contador al primer nodo
+    print $fh "contador -> $nodos[0];\n";
+
+    print $fh "}\n";
+    close($fh);
+
+    # Genera la imagen automáticamente (OBLIGATORIO)
+    system("dot -Tpng $archivo -o reporte_solicitudes.png");
+
+    print "Reporte Graphviz de Solicitudes generado: reporte_solicitudes.png\n";
+}

@@ -1,0 +1,13 @@
+digraph Proveedores {
+rankdir=LR;
+node [fontname="Arial"];
+splines=true;
+prov0 [shape=box, style=filled, fillcolor=lightyellow, label="NIT: 123\nEmpresa: dd"];
+prov1 [shape=box, style=filled, fillcolor=lightyellow, label="NIT: 3333\nEmpresa: f"];
+prov2 [shape=box, style=filled, fillcolor=lightyellow, label="NIT: 111\nEmpresa: d"];
+prov3 [shape=box, style=filled, fillcolor=lightyellow, label="NIT: 111111\nEmpresa: dd"];
+prov0 -> prov1 [dir=both];
+prov1 -> prov2 [dir=both];
+prov2 -> prov3 [dir=both];
+prov3 -> prov0 [dir=both];
+}

@@ -1,0 +1,6 @@
+digraph Solicitudes {
+rankdir=LR;
+node [shape=circle, style=filled, fillcolor=lightblue, fontname="Arial"];
+contador [shape=box, fillcolor=lightyellow, label="Total solicitudes: 0"];
+vacio [label="Sin solicitudes pendientes"];
+}
