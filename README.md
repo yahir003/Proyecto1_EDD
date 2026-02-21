@@ -8,15 +8,15 @@
 
 <br><br>
 
-Univerdidad San Carlos de Guatemala_____  
-Facultad de Ingenieria________________  
+Univerdidad San Carlos de Guatemala  
+Facultad de Ingenieria  
 **Curso:** Estructuras de Datos  
-**Proyecto:** Proyecto 1 – -Fase 1-Implementación de Estructuras Dinámicas  
+** Proyecto 1 – -Fase 1-Implementación de Estructuras Dinámicas** 
 
 <br>
 
 **Estudiante:** NOE YAHIR MAZARIEGOS GRAMAJO  
-**Carné:** __202113309______    
+**Carné:** __202113309   
 
 <br>
 
@@ -34,9 +34,8 @@ Sistema desarrollado en Perl utilizando estructuras de datos dinamicas y reporte
 
 ---
 
-# Manual Técnico – Sistema de Inventario Hospitalario (EDD)
+# Sistema de Inventario Hospitalario (EDD)
 
-## Descripción General del Sistema
 
 El sistema fue desarrollado en Perl utilizando programación orientada a objetos con el módulo Moo.
 Su objetivo principal es gestionar el inventario de medicamentos, solicitudes de reabastecimiento y entregas de proveedores, implementando estructuras de datos dinámicas y generando reportes visuales mediante Graphviz.
@@ -76,6 +75,7 @@ Los medicamentos se insertan mediante el método:
 ```
 insertar_ordenado()
 ```
+![Diagrama de actividades](LDEI.png)
 
 Este método mantiene la lista ordenada por código de medicamento, lo cual permite:
 
@@ -121,6 +121,8 @@ La lista es circular, lo que significa que:
 * El último nodo apunta al primero
 * Permite recorrer continuamente las solicitudes pendientes
 * Facilita la simulación de una cola de procesamiento administrativo
+* 
+![Diagrama de actividades](sol.png)
 
 El método principal es:
 
@@ -153,6 +155,7 @@ Esta estructura combina:
 
 * Lista circular principal → Proveedores
 * Lista circular secundaria → Historial de entregas por proveedor
+![Diagrama de actividades](pro.png)
 
 Clases utilizadas:
 
@@ -201,6 +204,7 @@ El sistema incluye un módulo especializado para generar reportes visuales en ti
 
 ## Reporte del Inventario
 
+[Reporte Graphiz](repo.png)
 Representa la lista doblemente enlazada mostrando:
 
 * Nodos rectangulares con información del medicamento
@@ -215,6 +219,7 @@ Representa la lista doblemente enlazada mostrando:
 ## Reporte de Solicitudes Pendientes
 
 Muestra la lista circular doblemente enlazada con:
+![Reporte Solicutudes](reposol.png)
 
 * Nodos circulares
 * Flechas en ambos sentidos
@@ -230,6 +235,7 @@ Visualiza:
 * Conexiones entre proveedor y su historial
 
 Los reportes se generan automáticamente tras modificaciones en las estructuras.
+![Reporte Proveedores y entregas](repopro.png)
 
 ---
 
@@ -282,4 +288,5 @@ Las decisiones de diseño se enfocaron en:
 * Actualización automática del estado del sistema
 
 * Anexos (Diagrama de Actividades)
-* ![Diagrama de actividades](ac.png)
+* ![Diagrama de actividades](act.png)
+
